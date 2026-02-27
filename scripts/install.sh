@@ -102,7 +102,12 @@ get_tool_path() {
             esac
             ;;
         vscode)      echo "./.vscode/skills" ;;
-        antigravity) echo "./.vscode/skills" ;;
+        antigravity)
+            case "$OS" in
+                windows)  echo "$USERPROFILE/.gemini/antigravity/skills" ;;
+                *)        echo "$HOME/.gemini/antigravity/skills" ;;
+            esac
+            ;;
         cursor)
             case "$OS" in
                 windows)  echo "$USERPROFILE/.cursor/skills" ;;
@@ -254,9 +259,9 @@ install_for_agent() {
             echo -e "  ${YELLOW}Note:${NC} Skills installed in current project (.vscode/skills/)"
             ;;
         antigravity)
-            install_skills "$(get_tool_path antigravity)" "Antigravity"
-            print_next_step ".github/copilot-instructions.md" "examples/vscode/copilot-instructions.md (same as VS Code)"
-            echo -e "  ${YELLOW}Note:${NC} Antigravity uses VS Code config paths"
+            target="$(get_tool_path antigravity)"
+            install_skills "$target" "Antigravity"
+            print_next_step "~/.gemini/GEMINI.md or .agent/rules/" "examples/antigravity/sdd-orchestrator.md"
             ;;
         cursor)
             install_skills "$(get_tool_path cursor)" "Cursor"
@@ -306,7 +311,7 @@ interactive_menu() {
     echo "  3) Gemini CLI     ($(get_tool_path gemini-cli))"
     echo "  4) Codex          ($(get_tool_path codex))"
     echo "  5) VS Code        ($(get_tool_path vscode))"
-    echo "  6) Antigravity    ($(get_tool_path antigravity))"
+    echo "  6) Antigravity    (~/.gemini/antigravity/skills/)"
     echo "  7) Cursor         ($(get_tool_path cursor))"
     echo "  8) Project-local  ($(get_tool_path project-local))"
     echo "  9) All global     (Claude Code + OpenCode + Gemini CLI + Codex + Cursor)"

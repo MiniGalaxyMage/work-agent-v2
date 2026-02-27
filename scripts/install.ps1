@@ -46,7 +46,7 @@ $ToolPaths = @{
     'gemini-cli'        = Join-Path $env:USERPROFILE '.gemini\skills'
     'codex'             = Join-Path $env:USERPROFILE '.codex\skills'
     'vscode'            = Join-Path '.' '.vscode\skills'
-    'antigravity'       = Join-Path '.' '.vscode\skills'
+    'antigravity'       = Join-Path $env:USERPROFILE '.gemini\antigravity\skills'
     'cursor'            = Join-Path $env:USERPROFILE '.cursor\skills'
     'project-local'     = Join-Path '.' 'skills'
 }
@@ -225,8 +225,7 @@ function Install-ForAgent {
         }
         'antigravity' {
             Install-Skills -TargetDir $ToolPaths['antigravity'] -ToolName 'Antigravity'
-            Write-NextStep '.github\copilot-instructions.md' 'examples\vscode\copilot-instructions.md (same as VS Code)'
-            Write-Warn 'Antigravity uses VS Code config paths'
+            Write-NextStep '~\.gemini\GEMINI.md or .agent\rules\' 'examples\antigravity\sdd-orchestrator.md'
         }
         'cursor' {
             Install-Skills -TargetDir $ToolPaths['cursor'] -ToolName 'Cursor'

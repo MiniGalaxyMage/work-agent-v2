@@ -275,22 +275,18 @@ test_vscode_skill_count() {
 }
 
 # ============================================================================
-# Tests — Antigravity (also uses .vscode/)
+# Tests — Antigravity (~/.gemini/antigravity/skills/)
 # ============================================================================
 
 test_install_antigravity() {
-    local project="$TEST_TMPDIR/antigravity-project"
-    mkdir -p "$project"
-    (cd "$project" && bash "$INSTALL_SCRIPT" --agent antigravity > /dev/null 2>&1)
-    assert_all_skills_installed "$project/.vscode/skills"
+    bash "$INSTALL_SCRIPT" --agent antigravity > /dev/null 2>&1
+    assert_all_skills_installed "$HOME/.gemini/antigravity/skills"
 }
 
 test_antigravity_skill_count() {
-    local project="$TEST_TMPDIR/antigravity-project"
-    mkdir -p "$project"
-    (cd "$project" && bash "$INSTALL_SCRIPT" --agent antigravity > /dev/null 2>&1)
+    bash "$INSTALL_SCRIPT" --agent antigravity > /dev/null 2>&1
     local count
-    count=$(find "$project/.vscode/skills" -name "SKILL.md" | wc -l | tr -d ' ')
+    count=$(find "$HOME/.gemini/antigravity/skills" -name "SKILL.md" | wc -l | tr -d ' ')
     assert_eq "9" "$count" "Expected exactly 9 skills for Antigravity"
 }
 
@@ -622,7 +618,7 @@ run_test "Exactly 9 SKILL.md files" test_vscode_skill_count
 echo ""
 
 echo -e "${BOLD}Antigravity${NC}"
-run_test "Installs all 9 skills to .vscode/skills/" test_install_antigravity
+run_test "Installs all 9 skills to ~/.gemini/antigravity/skills/" test_install_antigravity
 run_test "Exactly 9 SKILL.md files" test_antigravity_skill_count
 echo ""
 

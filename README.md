@@ -382,7 +382,7 @@ Dedicated setup guides for all supported tools:
 - [Gemini CLI](#gemini-cli) — Inline skill execution
 - [Codex](#codex) — Inline skill execution
 - [VS Code (Copilot)](#vs-code-copilot) — Agent mode with context files
-- [Antigravity](#antigravity) — VS Code-compatible, same configuration
+- [Antigravity](#antigravity) — Native skill support with `~/.gemini/antigravity/skills/` and `.agent/` paths
 - [Cursor](#cursor) — Inline skill execution
 
 ### Claude Code
@@ -537,27 +537,33 @@ Open VS Code, open the Chat panel (Ctrl+Cmd+I / Ctrl+Alt+I), and type `/sdd-init
 
 ### Antigravity
 
-[Antigravity](https://antigravity.google) is Google's AI-first IDE built on VS Code. It follows the same configuration patterns as VS Code.
+[Antigravity](https://antigravity.google) is Google's AI-first IDE with native skill support. It has its own skill and rule system separate from VS Code.
 
 **1. Copy skills:**
 
 ```bash
-# Per-project
-cp -r skills/sdd-* ./your-project/.vscode/skills/
-
-# Or using the install script
+# Global (available across all projects)
 ./scripts/install.sh  # Choose Antigravity option
+
+# Or manually (global)
+cp -r skills/sdd-* ~/.gemini/antigravity/skills/
+
+# Workspace-specific (per project)
+mkdir -p .agent/skills
+cp -r skills/sdd-* .agent/skills/
 ```
 
 **2. Add orchestrator instructions:**
 
-Follow the same steps as [VS Code (Copilot)](#vs-code-copilot) — Antigravity uses the same configuration paths and instruction files.
+Add the SDD orchestrator as a global rule in `~/.gemini/GEMINI.md`, or create a workspace rule in `.agent/rules/sdd-orchestrator.md`.
+
+See [`examples/antigravity/sdd-orchestrator.md`](examples/antigravity/sdd-orchestrator.md) for the rule content.
 
 **3. Verify:**
 
-Open Antigravity in your project and type `/sdd-init` in the chat panel.
+Open Antigravity and type `/sdd-init` in the agent panel.
 
-> Antigravity is VS Code-compatible — all VS Code MCP and instruction configurations work identically.
+> **Note:** Antigravity uses `.agent/skills/` and `.agent/rules/` for workspace config, and `~/.gemini/antigravity/skills/` for global. It does NOT use `.vscode/` paths.
 
 ---
 
@@ -641,6 +647,7 @@ agent-teams-lite/
 │   ├── gemini-cli/GEMINI.md
 │   ├── codex/agents.md
 │   ├── vscode/copilot-instructions.md
+│   ├── antigravity/sdd-orchestrator.md
 │   └── cursor/.cursorrules
 └── scripts/
     └── install.sh                     ← Interactive installer
