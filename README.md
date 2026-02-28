@@ -520,12 +520,22 @@ cp -r skills/sdd-* ./your-project/.vscode/skills/
 
 **2. Add orchestrator instructions:**
 
-Create or edit `.github/copilot-instructions.md` in your project and append the orchestrator instructions from [`examples/vscode/copilot-instructions.md`](examples/vscode/copilot-instructions.md).
+Create a VS Code `.instructions.md` file in the User prompts folder and append the orchestrator instructions from [`examples/vscode/copilot-instructions.md`](examples/vscode/copilot-instructions.md).
+
+Recommended User prompt path:
+- macOS: `~/Library/Application Support/Code/User/prompts/sdd-orchestrator.instructions.md`
+- Linux: `~/.config/Code/User/prompts/sdd-orchestrator.instructions.md`
+- Windows: `%APPDATA%\Code\User\prompts\sdd-orchestrator.instructions.md`
 
 Alternatively, use VS Code's custom instructions setting:
 1. Open Settings (`Cmd+,` / `Ctrl+,`)
 2. Search for `github.copilot.chat.codeGeneration.instructions`
 3. Add the SDD orchestrator instructions
+
+If you also configure MCP at user level, use:
+- macOS: `~/Library/Application Support/Code/User/mcp.json`
+- Linux: `~/.config/Code/User/mcp.json`
+- Windows: `%APPDATA%\Code\User\mcp.json`
 
 **3. Verify:**
 
