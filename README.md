@@ -14,6 +14,7 @@
   <a href="#how-it-works">How It Works</a> &bull;
   <a href="#commands">Commands</a> &bull;
   <a href="#installation">Installation</a> &bull;
+  <a href="#releases">Releases</a> &bull;
   <a href="#supported-tools">Supported Tools</a>
 </p>
 
@@ -303,6 +304,18 @@ Then start building:
 ```
 
 Or let it detect automatically — describe a substantial feature and the orchestrator will suggest SDD.
+
+---
+
+## Releases
+
+We publish versioned release notes on GitHub:
+
+- https://github.com/Gentleman-Programming/agent-teams-lite/releases
+
+Latest release:
+
+- `v3.0.5` — Lean orchestrator prompts across all agents, reduced always-loaded prompt footprint, and standardized `_shared` install steps.
 
 ---
 
