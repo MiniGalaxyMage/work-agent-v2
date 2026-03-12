@@ -84,7 +84,7 @@ Before writing code, determine if the project uses TDD:
 
 ```
 Detect TDD mode from (in priority order):
-├── openspec/config.yaml → rules.apply.tdd (true/false — highest priority)
+├── openspec/config.yaml → rules.apply.tdd (true/false — highest priority, only if mode is openspec or hybrid)
 ├── User's installed skills (e.g., tdd/SKILL.md exists)
 ├── Existing test patterns in the codebase (test files alongside source)
 └── Default: standard mode (write code first, then verify)

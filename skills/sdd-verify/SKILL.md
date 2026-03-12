@@ -70,8 +70,11 @@ From the registry, identify and read any skills whose triggers match your task. 
 
 Verify ALL tasks are done:
 
+**IF mode is `openspec` or `hybrid`:** Read `tasks.md` from the change folder.
+**IF mode is `engram`:** Read tasks from Engram (already retrieved in the Execution and Persistence Contract above). Do NOT look for or create `openspec/` directories.
+
 ```
-Read tasks.md
+Read tasks (from filesystem or Engram depending on mode)
 ├── Count total tasks
 ├── Count completed tasks [x]
 ├── List incomplete tasks [ ]
@@ -126,7 +129,7 @@ Detect the project's test runner and execute the tests:
 
 ```
 Detect test runner from:
-├── openspec/config.yaml → rules.verify.test_command (highest priority)
+├── openspec/config.yaml → rules.verify.test_command (highest priority, only if mode is openspec or hybrid)
 ├── package.json → scripts.test
 ├── pyproject.toml / pytest.ini → pytest
 ├── Makefile → make test
@@ -150,7 +153,7 @@ Detect and run the build/type-check command:
 
 ```
 Detect build command from:
-├── openspec/config.yaml → rules.verify.build_command (highest priority)
+├── openspec/config.yaml → rules.verify.build_command (highest priority, only if mode is openspec or hybrid)
 ├── package.json → scripts.build → also run tsc --noEmit if tsconfig.json exists
 ├── pyproject.toml → python -m build or equivalent
 ├── Makefile → make build
@@ -168,7 +171,7 @@ Flag: WARNING if there are type errors even with passing build
 
 ### Step 5d: Coverage Validation (Real Execution — if threshold configured)
 
-Run with coverage only if `rules.verify.coverage_threshold` is set in `openspec/config.yaml`:
+Run with coverage only if `rules.verify.coverage_threshold` is set in `openspec/config.yaml` (only applicable in `openspec` or `hybrid` mode):
 
 ```
 IF coverage_threshold is configured:
@@ -207,9 +210,9 @@ A spec scenario is only considered COMPLIANT when there is a test that passed pr
 
 Persist the report according to the resolved `artifact_store.mode`, following the conventions in `skills/_shared/`:
 
-- **engram**: Use `engram-convention.md` — artifact type `verify-report`
-- **openspec**: Write to `openspec/changes/{change-name}/verify-report.md`
-- **none**: Return the full report inline, do NOT write any files
+- **engram**: Use `engram-convention.md` — artifact type `verify-report`. Do NOT create any `openspec/` directories.
+- **openspec** or **hybrid**: Write to `openspec/changes/{change-name}/verify-report.md`
+- **none**: Return the full report inline, do NOT write any files and do NOT create any `openspec/` directories.
 
 ### Step 8: Return Summary
 

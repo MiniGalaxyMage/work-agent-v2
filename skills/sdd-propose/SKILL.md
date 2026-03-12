@@ -64,16 +64,20 @@ From the registry, identify and read any skills whose triggers match your task. 
 
 ### Step 2: Create Change Directory
 
-Create the change folder structure:
+**IF mode is `openspec` or `hybrid`:** create the change folder structure:
 
 ```
 openspec/changes/{change-name}/
 └── proposal.md
 ```
 
+**IF mode is `engram`:** Do NOT create any `openspec/` directories. Save proposal to Engram only.
+**IF mode is `none`:** Do NOT create any `openspec/` directories and do NOT save to Engram. Return proposal inline only.
+
 ### Step 3: Read Existing Specs
 
-If `openspec/specs/` has relevant specs, read them to understand current behavior that this change might affect.
+**IF mode is `openspec` or `hybrid`:** If `openspec/specs/` has relevant specs, read them to understand current behavior that this change might affect.
+**IF mode is `engram`:** Search Engram for existing specs using `mem_search(query: "sdd/", project: "{project}")`.
 
 ### Step 4: Write proposal.md
 
@@ -156,7 +160,7 @@ Return to the orchestrator:
 ## Proposal Created
 
 **Change**: {change-name}
-**Location**: openspec/changes/{change-name}/proposal.md
+**Location**: {openspec/changes/{change-name}/proposal.md | Engram | inline}
 
 ### Summary
 - **Intent**: {one-line summary}

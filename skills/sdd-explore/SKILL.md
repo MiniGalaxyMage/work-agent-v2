@@ -66,7 +66,7 @@ Before starting, load any existing project context and specs per the active conv
   2. `mem_get_observation(id: {id from step 1})` → full project context
   3. Optionally `mem_search(query: "sdd/", project: "{project}")` → find existing artifacts
   (If no results, proceed without prior context.)
-- **openspec**: Read `openspec/config.yaml` and `openspec/specs/`.
+- **openspec** or **hybrid**: Read `openspec/config.yaml` and `openspec/specs/`. Do NOT read openspec paths in `engram` or `none` modes.
 - **none**: Use whatever context the orchestrator passed in the prompt.
 
 ## What to Do

@@ -71,7 +71,7 @@ From the design document, identify:
 
 ### Step 3: Write tasks.md
 
-Create the task file:
+**IF mode is `openspec` or `hybrid`:** Create the task file in the change folder:
 
 ```
 openspec/changes/{change-name}/
@@ -80,6 +80,9 @@ openspec/changes/{change-name}/
 ├── design.md
 └── tasks.md               ← You create this
 ```
+
+**IF mode is `engram`:** Do NOT create any `openspec/` directories. Prepare the tasks content in memory and save to Engram in Step 4.
+**IF mode is `none`:** Do NOT create any `openspec/` directories and do NOT save to Engram. Return tasks inline only.
 
 #### Task File Format
 
@@ -174,7 +177,7 @@ Return to the orchestrator:
 ## Tasks Created
 
 **Change**: {change-name}
-**Location**: openspec/changes/{change-name}/tasks.md
+**Location**: {openspec/changes/{change-name}/tasks.md | Engram | inline}
 
 ### Breakdown
 | Phase | Tasks | Focus |
