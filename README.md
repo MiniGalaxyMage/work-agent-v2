@@ -582,17 +582,24 @@ One dedicated agent per SDD phase, each configurable with its own model. Use a c
 ./scripts/setup.sh --agent opencode --opencode-mode multi
 ```
 
-This creates 9 subagents (`sdd-init`, `sdd-explore`, `sdd-propose`, `sdd-spec`, `sdd-design`, `sdd-tasks`, `sdd-apply`, `sdd-verify`, `sdd-archive`) plus the `sdd-orchestrator` coordinator. To assign models, edit `~/.config/opencode/opencode.json` and add `"model": "your-model"` to each agent:
+This creates 9 subagents (`sdd-init`, `sdd-explore`, `sdd-propose`, `sdd-spec`, `sdd-design`, `sdd-tasks`, `sdd-apply`, `sdd-verify`, `sdd-archive`) plus the `sdd-orchestrator` coordinator. To assign models, edit `~/.config/opencode/opencode.json` and add `"model": "provider/model-id"` to each agent:
 
 ```json
 {
   "agent": {
-    "sdd-orchestrator": { "mode": "primary", "model": "coordinator-model" },
-    "sdd-explore":      { "mode": "subagent", "model": "fast-cheap-model" },
-    "sdd-apply":        { "mode": "subagent", "model": "good-coder-model" },
-    "sdd-verify":       { "mode": "subagent", "model": "strongest-model" }
+    "sdd-orchestrator": { "mode": "primary", "model": "anthropic/claude-sonnet-4-6" },
+    "sdd-explore":      { "mode": "subagent", "model": "google/gemini-2.5-flash" },
+    "sdd-spec":         { "mode": "subagent", "model": "anthropic/claude-opus-4-6" },
+    "sdd-design":       { "mode": "subagent", "model": "anthropic/claude-opus-4-6" },
+    "sdd-apply":        { "mode": "subagent", "model": "anthropic/claude-sonnet-4-6" },
+    "sdd-verify":       { "mode": "subagent", "model": "openai/o3" }
   }
 }
+```
+
+The format is `"provider/model-id"` — check your available models at `~/.cache/opencode/models.json`. Common providers: `anthropic`, `openai`, `google`, `openrouter`. Agents without a `model` field inherit the default model.
+
+The setup script preserves your model choices across updates — re-running `setup.sh` will update agent prompts and tools but keep any `model` fields you configured.
 ```
 
 <details>
