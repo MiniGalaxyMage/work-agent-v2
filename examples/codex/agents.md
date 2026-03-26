@@ -149,3 +149,19 @@ Convention files under `~/.codex/skills/_shared/`: `engram-convention.md`, `pers
 | `engram` | `mem_search(...)` → `mem_get_observation(...)` |
 | `openspec` | read `openspec/changes/*/state.yaml` |
 | `none` | State not persisted — explain to user |
+
+### Agent Routing Per Phase
+
+When delegating SDD phases, use these specific agents to optimize model usage:
+
+| Phase | Agent | Model | Why |
+|-------|-------|-------|-----|
+| EXPLORE | @explorer | gpt-5.4-mini | Analysis only, no code |
+| PROPOSE | @proposer | gpt-5.4-mini | Reasoning, no code |
+| SPEC | @spec-writer | gpt-5.4-mini | Requirements, no code |
+| DESIGN | @designer | gpt-5.4 | Complex architecture decisions |
+| TASKS | @task-planner | gpt-5.4-mini | Breakdown, no code |
+| IMPLEMENT | @implementer | codex-5.3 | Code generation (optimized) |
+| VERIFY | @verifier | gpt-5.4-mini | Validation, minimal code |
+
+Use `@agent-name` syntax when launching sub-agents to ensure correct model routing.

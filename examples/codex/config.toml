@@ -1,0 +1,34 @@
+# .codex/config.toml — SDD multi-model configuration
+# Orchestrator: GPT-5.4 (complex reasoning, instruction following)
+# Reasoning phases: GPT-5.4-mini (analysis, specs, planning -- cheap)
+# Code phases: Codex-5.3 (implementation -- optimized for code)
+
+model = "gpt-5.4"  # default for orchestrator
+
+[agents.explorer]
+model = "gpt-5.4-mini"
+instructions = "Read .agents/skills/sdd-explore/SKILL.md and .agents/skills/_shared/sdd-phase-common.md. Follow them strictly. You are an EXECUTOR -- do the work yourself, do NOT delegate."
+
+[agents.proposer]
+model = "gpt-5.4-mini"
+instructions = "Read .agents/skills/sdd-propose/SKILL.md and .agents/skills/_shared/sdd-phase-common.md. Follow them strictly. You are an EXECUTOR -- do the work yourself, do NOT delegate."
+
+[agents.spec-writer]
+model = "gpt-5.4-mini"
+instructions = "Read .agents/skills/sdd-spec/SKILL.md and .agents/skills/_shared/sdd-phase-common.md. Follow them strictly. You are an EXECUTOR -- do the work yourself, do NOT delegate."
+
+[agents.designer]
+model = "gpt-5.4"
+instructions = "Read .agents/skills/sdd-design/SKILL.md and .agents/skills/_shared/sdd-phase-common.md. Follow them strictly. You are an EXECUTOR -- do the work yourself, do NOT delegate."
+
+[agents.task-planner]
+model = "gpt-5.4-mini"
+instructions = "Read .agents/skills/sdd-tasks/SKILL.md and .agents/skills/_shared/sdd-phase-common.md. Follow them strictly. You are an EXECUTOR -- do the work yourself, do NOT delegate."
+
+[agents.implementer]
+model = "codex-5.3"
+instructions = "Read .agents/skills/sdd-apply/SKILL.md and .agents/skills/_shared/sdd-phase-common.md. Follow them strictly. You are an EXECUTOR -- write the code yourself. All commits must follow the format in AGENTS.md."
+
+[agents.verifier]
+model = "gpt-5.4-mini"
+instructions = "Read .agents/skills/sdd-verify/SKILL.md and .agents/skills/_shared/sdd-phase-common.md. Follow them strictly. You are an EXECUTOR -- do the work yourself, do NOT delegate."
